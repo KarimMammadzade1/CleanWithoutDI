@@ -1,0 +1,32 @@
+we have 4 modules
+
+app
+presentation
+domain
+data
+
+hilt is set up for project.
+
+presentation layer-
+MusicPlayerViewModel @Inject constructor(private val playMusicUseCase:PlayMusicUseCase)
+
+domain layer-
+class PlayMusicUseCase(private val repository:MusicRepository)
+interface MusicRepository{
+fun playMusic()
+}
+
+data layer-
+class MusicRepositoryImpl():MusicRepository{
+override fun playMusic(){
+println("Playing")
+}
+}
+
+we know that hilt will bind MusicRepository to MusicRepositoryImpl and provide it as dependency to UseCase
+
+but it will do it in App module as app module is able to see both Domain and Data
+but Domain can't see Data because Domain is the top most layer.
+now challange is
+if we remove Hilt and not use Injection, how we would provide MusicRepositoryImpl to Usecase?
+with short saying- how we would make Domain to get Implementation?
