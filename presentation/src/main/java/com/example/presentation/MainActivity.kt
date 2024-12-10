@@ -7,8 +7,6 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import com.example.data.MusicPlayerRepositoryImpl
-import com.example.domain.MusicPlayerRepository
 import com.example.domain.PlayMusicUseCase
 
 class MainActivity : AppCompatActivity() {
@@ -27,8 +25,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun initializeDependency() {
-        val repository: MusicPlayerRepository = MusicPlayerRepositoryImpl()
-        val useCase = PlayMusicUseCase(repository)
+        val useCase = PlayMusicUseCase.getInstance()
         viewModel = MainViewModel(useCase)
         val result = viewModel.playMusic()
         val view = findViewById<TextView>(R.id.textview)
